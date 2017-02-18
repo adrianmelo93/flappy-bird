@@ -18,5 +18,4 @@ Pipe.prototype.render = function(){
   this.ctx.fillStyle = "#74BF2E";
   this.ctx.fillRect(this.xpos+5, this.ypos+5, this.width-10, this.length-10);
   this.ctx.restore();
-  // this.ctx.fillStyle = "#FFFFFF";
 };
