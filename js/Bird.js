@@ -14,7 +14,7 @@ const Bird = function(x, y, ctx){
   var self = this;
   window.addEventListener('keydown', function(e){
     if (e.keyCode === 32 && !self.dead){
-      self.velY = -10;
+      self.velY = -14;
     }
   });
 };
@@ -23,11 +23,12 @@ Bird.prototype.update = function(pipes){
   this.velY += 1.25;
   if (this.detectCollisions(pipes)){
     this.dead = true;
+
   }
+
 
   this.ticks++;
   if (this.ticks % 15 === 0) this.spriteIndex = (this.spriteIndex+1) % this.sprites.length;
-
 };
 
 Bird.prototype.render = function(){
@@ -40,6 +41,9 @@ Bird.prototype.render = function(){
   this.ctx.drawImage(this.sprites[this.spriteIndex], renderX, renderY);
 
   this.ctx.restore();
+  this.ctx.font = '48px serif';
+
+                                     //////////
 };
 
 Bird.prototype.detectCollisions = function(pipes){
@@ -65,6 +69,7 @@ Bird.prototype.detectCollisions = function(pipes){
       if (a > x0 && a < x1 && b > y2 ||
           alpha2 > x0 && alpha2 < x1 && beta2 > y2) {
         return true;
+
       }
     }
   }

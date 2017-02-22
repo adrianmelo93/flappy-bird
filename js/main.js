@@ -8,6 +8,7 @@ window.onload = function(){
 
    const environment = new Environment(c, ctx);
    const bird = new Bird(250, 300, ctx);
+   const sun = new Sun(150, 100, ctx);
    const pipes = [];
    let pipeSet = generateRandomPipes(ctx, c.width, c.height);
    pipes.push(pipeSet.top, pipeSet.bottom);
@@ -22,6 +23,7 @@ window.onload = function(){
     MAIN GAME LOOP
    */
    function gameLoop(){
+     //ctx.fillRect(0,0,c.width,c.height);
      bird.update(pipes);
      if (!bird.dead){
        environment.update();
@@ -35,9 +37,12 @@ window.onload = function(){
        pipe1.render();
      });
      bird.render();
+
      if (bird.dead){
        drawGameOver(ctx, c);
      }
+      sun.update();
+     sun.render();
      window.requestAnimationFrame(gameLoop);
    }
  };
@@ -56,4 +61,7 @@ function drawGameOver(ctx, c){
   ctx.font="30px Verdana";
   ctx.textAlign="center";
   ctx.fillText("Game Over!!",c.width/2 , c.height/2);
+  document.getElementById('canvas').onclick=function(){
+    location.reload();
+  }
 }
